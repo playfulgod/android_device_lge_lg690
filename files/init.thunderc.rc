@@ -1,0 +1,262 @@
+## hopemini@lge.com, 20100416
+
+on boot
+	# Update the mountpoints to noatime
+	mount yaffs2 mtd@system /system ro remount noatime
+	mount yaffs2 mtd@userdata /data remount nosuid nodev noatime
+	mount yaffs2 mtd@cache /cache remount nosuid nodev noatime
+
+	# Increase the read ahead cache from 128KB to 2048KB (SD)
+	write /sys/devices/virtual/bdi/179:0/read_ahead_kb 2048
+
+	#  Increase the read ahead cache from 4KB to 512KB (/data)
+	write /sys/devices/virtual/mtd/mtd6/mtdblock6/queue/read_ahead_kb 512
+
+	#  Increase the read ahead cache from 4KB to 512KB (/system)
+	write /sys/devices/virtual/mtd/mtd6/mtdblock5/queue/read_ahead_kb 512
+
+	# Mark the internal NAND as non-rotational just in case
+	write /sys/devices/virtual/mtd/mtd1/mtdblock1/queue/rotational 0
+	write /sys/devices/virtual/mtd/mtd5/mtdblock5/queue/rotational 0
+	write /sys/devices/virtual/mtd/mtd6/mtdblock6/queue/rotational 0
+
+	chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
+	chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+	chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+	chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+	chown system system /sys/module/sco/parameters/disable_esco
+	chmod 0660 /sys/module/bluetooth_power/parameters/power
+	chmod 0660 /sys/class/rfkill/rfkill0/state
+	chmod 0660 /proc/bluetooth/sleep/proto
+	chown bluetooth bluetooth /dev/ttyHS0
+	chmod 0660 /dev/ttyHS0
+	chmod 0666 /dev/msm_snd
+## VIBRATOR
+# LGE_CHANGE_E [kiwone.seo@lge.com] 2010-02-03, LG_FW_AUDIO_PWM_VIBRATOR 
+	chmod 0666 /sys/class/timed_output/vibrator/amp
+	chmod 0666 /sys/devices/platform/lg_diag_cmd/sms_status
+	chmod 0666 /sys/devices/platform/lg_diag_cmd/get_sms
+	chmod 0666 /sys/devices/platform/lg_diag_cmd/set_sms
+	chmod 0666 /sys/devices/platform/lg_diag_cmd/rsp_sms_status
+	chmod 0666 /sys/devices/platform/lg_diag_cmd/rsp_get_sms
+	chmod 0666 /sys/devices/platform/lg_diag_cmd/rsp_set_sms
+## SENSOR
+	chown compass system /dev/ami304
+	chmod 0640 dev/ami304
+	chown compass system /dev/ami304daemon
+	chmod 0640 dev/ami304daemon
+	chown compass system /dev/ami304hal
+	chmod 0640 dev/ami304hal
+	mkdir /data/amit 0777 ami304d ami304d
+	chmod 0666 /data/amit/AMI304_Config.ini
+	chown compass system /dev/KR3DH
+	chmod 0640 /dev/KR3DH
+	chown compass system /dev/KR3DM
+	chmod 0640 /dev/KR3DM
+## PROXIMITY SENSOR
+	chown compass system /sys/bus/i2c/drivers/proximity_gp2ap/4-0044/enable
+	chmod 0666 /sys/bus/i2c/drivers/proximity_gp2ap/4-0044/enable
+## USB
+	chmod 0666 /sys/devices/platform/msm_hsusb_periphera/composition
+
+	chown system graphics /dev/hw3d
+	chmod 0660 /dev/hw3d
+	chown root root /dev/kgsl
+	chmod 0666 /dev/kgsl
+	chown root root /dev/kgsl-3d0
+	chmod 0666 /dev/kgsl-3d0
+	chown root root /dev/kgsl-2d0
+	chmod 0666 /dev/kgsl-2d0
+	chmod 0666 /dev/pmem
+	chown system graphics /dev/pmem_gpu
+	chmod 0666 /dev/pmem_gpu
+	chown system graphics /dev/pmem_gpu1
+	chmod 0666 /dev/pmem_gpu1
+	chown system audio /dev/msm_aac
+	chmod 0660 /dev/msm_aac
+	chown system audio /dev/msm_amrnb_in
+	chmod 0660 /dev/msm_amrnb_in
+	chown system audio /dev/msm_amrnb
+	chmod 0660 /dev/msm_amrnb
+	chown system audio /dev/msm_qcelp
+	chmod 0660 /dev/msm_qcelp
+	chown system audio /dev/msm_evrc
+	chmod 0660 /dev/msm_evrc
+	chown system audio /dev/msm_voicememo
+	chmod 0660 /dev/msm_voicememo
+	chown system graphics /dev/msm_rotator
+	chmod 0660 /dev/msm_rotator
+	chown system audio /dev/msm_preproc_ctl
+	chmod 0660 /dev/msm_preproc_ctl
+## AUDIO - SBA52101007
+	chown system audio /dev/pmem_smipool
+	chmod 0660 /dev/pmem_smipool
+	chown system audio /dev/pmem_audio
+	chmod 0660 /dev/pmem_audio
+## QCT5320
+	chown system audio /dev/msm_amr_in
+	chmod 0660 /dev/msm_amr_in
+	chown system audio /dev/msm_amrwb
+	chmod 0660 /dev/msm_amrwb
+	chown system audio /dev/msm_vidc_reg
+	chmod 0660 /dev/msm_vidc_reg
+	chown system audio /dev/msm_vidc_dec
+	chmod 0660 /dev/msm_vidc_dec
+	chown system audio /dev/msm_vidc_enc
+	chmod 0660 /dev/msm_vidc_enc
+
+	chmod 0666 /dev/graphics/fb0
+	chmod 0666 /sys/class/leds/lcd-backlight/alc
+
+	chown system system /dev/system_bus_freq
+	chmod 0660 /dev/system_bus_freq
+	chown system system /dev/cpu_dma_latency
+	chmod 0660 /dev/cpu_dma_latency
+
+	mkdir /data/radio 0770 radio radio
+	chown system radio /dev/rtc1
+	chmod 0660 radio /dev/rtc1
+
+# LGE_CHANGE_S, [jisung.yang@lge.com] 2010-04-24, <make wifi directory>
+# WIFI
+	mkdir /data/misc/wifi/sockets 0770 wifi wifi
+	setprop wifi.supplicant_scan_interval 20
+	setprop wifi.interface wlan0
+	mkdir /data/disk 0777 system system
+
+#DHCP
+	mkdir /data/misc/dhcp 0777 system system
+	chmod 0666 /data/bdaddr
+
+## ERS
+	mkdir /data/data/com.lge.ers
+	mkdir /data/data/com.lge.ers/android
+	mkdir /data/data/com.lge.ers/kernel
+	mkdir /data/data/com.lge.ers/arm9
+	chmod 0777 /data/data/com.lge.ers/android
+	chmod 0777 /data/data/com.lge.ers/kernel
+	chmod 0777 /data/data/com.lge.ers/arm9
+
+# Collect ramconsole data
+	copy /proc/last_kmsg /data/dontpanic/last_kmsg
+	chown root log /data/dontpanic/last_kmsg
+	chmod 0640 /data/dontpanic/last_kmsg
+
+service bdaddr /system/bin/bdaddr_read
+	user root
+	disabled
+	oneshot
+
+on property:init.svc.hcid=running
+	write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
+
+	# LGE_CHANGE_S [sm.shim@lge.com] 2010-08-02, FPRI/DB check
+	# DBCHECK
+	mkdir /data/dbcheck 0777 system system
+
+	# LGE_CHANGE_E [sm.shim@lge.com] 2010-08-02, FPRI/DB check
+	# LGE_CHANGE_S [kaisr.shin@lge.com] 2010-07-14, merge from MS690 : 20100703 infojunhyung.cho@lge.com MS690:create r$
+	mkdir /cache/com.hp.mvpdm 0770
+	chown root root /cache/com.hp.mvpdm
+	chmod 0777 /cache/com.hp.mvpdm
+
+	mkdir /cache/com.hp.mvpdm/tmp 0770
+	chown root root /cache/com.hp.mvpdm/tmp
+	chmod 0770 /cache/com.hp.mvpdm/tmp
+	# LGE_CHANGE_E [kaisr.shin@lge.com] 2010-07-14
+
+on property:init.svc.bootanim=running
+	start bdaddr
+
+service hciattach /system/bin/brcm_patchram_plus -d --baudrate 3000000 --patchram /system/bin/BCM4325.hcd --enable_hci /dev/ttyHS0
+	user bluetooth
+	group bluetooth net_bt_admin
+	disabled
+	oneshot
+
+service qmuxd /system/bin/qmuxd 
+
+service cnd /system/bin/cnd
+	socket cnd stream 660 root radio
+	socket cne stream 660 root radio
+
+service ami304d /system/bin/ami304d
+	user compass
+	group system
+
+## USB
+# LGE_CHANGE [dojip.kim@lge.com] 2010-09-05,
+# postpone port-bridge daemon launch due to lock-up during boot-up time (from VS660)
+#service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyHSUSB0
+#	 disabled
+
+#on property:init.svc.bootanim=stopped
+#	 start port-bridge
+
+# LGE_CHANGE_S, [jisung.yang@lge.com], 2010-04-24,<register WLAN services>
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf #-dd
+	socket wpa_wlan0 dgram 660 wifi wifi
+	group system wifi inet
+	disabled
+	oneshot
+#	console
+
+#service dhcpcd /system/bin/dhcpcd -B wlan0
+service dhcpcd_wlan0 /system/bin/dhcpcd -BKLA wlan0 # disable ARP operation
+	disabled
+	oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n # ensures ip renewal on some routers/networks
+	disabled
+	oneshot
+
+on property:init.svc.wpa_supplicant=stopped
+stop dhcpcd_wlan0
+# LGE_CHANGE_E, [jisung.yang@lge.com], 2010-04-24,<register WLAN services>
+
+#service dhcp-service /system/bin/netcfg eth0 dhcp
+#	 oneshot
+
+on property:dev.bootcomplete=1
+	start qcom-post-boot
+
+#on property:dev.bootcomplete=1
+#	 stop dhcp-service
+#	 start dhcp-service
+
+
+service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11
+	user root
+	disabled
+
+#service netmgrd /system/bin/netmgrd -E
+#	 disabled
+
+#on property:ro.use_data_netmgrd=true
+#	 start netmgrd
+
+# LGE_CHANGE [dojip.kim@lge.com] 2010-09-02, blocked in production build
+# bugreport is triggered by the KEY_VOLUME_DOWN and KEY_MENU keycodes
+service bugreport /system/bin/logwrapper /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
+	disabled
+	oneshot
+	keycodes 114 139
+
+# LGE_CHANGE_S [jeongku.choi@lge.com] 2010-07-09, [CIQ] adapting patch files
+service iqmsd /system/bin/iqmsd
+	disabled
+
+on property:service.iq.active=1
+	start iqmsd
+
+on property:service.iq.active=0
+	stop iqmsd
+
+# LGE_CHANGE_E [jeongku.choi@lge.com] 2010-07-09, [CIQ]
+
+# LGE_CHANGE [dojip.kim@lge.com] 2010-06-14, from VS660
+# LGE_CHANGE [dojip.kim@lge.com] 2010-09-29, no auto udpate in mass
+# mcs6000 TOUCH F/W AUTO upgrade run
+# LGE_CHANGE [younchan.kim,2010-06-13] 
+#service tsdown /system/bin/tsdown
+#	oneshot

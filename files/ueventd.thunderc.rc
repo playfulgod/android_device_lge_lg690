@@ -1,0 +1,8 @@
+# Overrides for the CDMA variants
+/dev/oncrpc/*             0660   radio       radio
+/dev/ttyHSUSB0            0660   root        system
+/dev/smdcntl0             0640   radio       radio
+/dev/smdcntl1             0640   radio       radio
+/dev/smdcntl2             0640   radio       radio
+/dev/kgsl-3d0             0666   root        root
+/dev/hw3d                 0666   root        root
