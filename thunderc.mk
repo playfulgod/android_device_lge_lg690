@@ -60,7 +60,8 @@ PRODUCT_COPY_FILES += \
     device/lge/thunderc/files/chargerimages/battery_bg.rle:root/chargerimages/battery_bg.rle \
     device/lge/thunderc/files/chargerimages/black_bg.rle:root/chargerimages/black_bg.rle \
     device/lge/thunderc/files/chargerimages/battery_wait_ani_01.rle:root/chargerimages/battery_wait_ani_01.rle \
-    device/lge/thunderc/files/chargerimages/battery_wait_ani_01.rle:root/chargerimages/battery_wait_ani_02.rle 
+    device/lge/thunderc/files/chargerimages/battery_wait_ani_01.rle:root/chargerimages/battery_wait_ani_02.rle \
+    device/lge/thunderc/files/bin/battery_charging:system/bin/battery_charging
 
 
 
@@ -203,10 +204,11 @@ PRODUCT_COPY_FILES += \
     device/lge/thunderc/files/etc/media_profiles.xml:system/etc/media_profiles.xml \
     device/lge/thunderc/files/etc/init.d/mvdalvik.sh:system/etc/init.d/01mvdalvik \
 
-# Bootsound
+# Boot
 PRODUCT_COPY_FILES += \
      device/lge/thunderc/files/bin/bootsound/:system/bin/bootsound \
      device/lge/thunderc/files/media/audio/ui/android_audio.mp3:system/media/audio/ui/android_audio.mp3 \
+     device/lge/thunderc/files/media/bootanimation.zip \
      device/lge/thunderc/files/etc/init.local.rc:/system/etc/init.local.rc 
 
 # Apps
@@ -256,7 +258,7 @@ ifeq ($(SUB_MODEL),MS690)
 # MetroPCS MMS fix
 PRODUCT_COPY_FILES += \
     device/lge/thunderc/files/xbin/$(SUB_MODEL)/sqlite3:system/xbin/sqlite3 \
-    device/lge/thunderc/files/apps/$(SUB_MODEL)/Mms/Mms.apk:system/app/Mms.apk
+    device/lge/thunderc/files/apps/$(SUB_MODEL)/Mms.apk:system/app/Mms.apk
 endif
 
 # Let's use our own GPS config file
@@ -335,4 +337,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
     gsm.sim.operator.numeric=$(CDMA_CARRIER_NUMERIC) \
     gsm.operator.alpha=$(CDMA_CARRIER_ALPHA) \
     gsm.operator.numeric=$(CDMA_CARRIER_NUMERIC) 
-
