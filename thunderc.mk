@@ -208,7 +208,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
      device/lge/thunderc/files/bin/bootsound/:system/bin/bootsound \
      device/lge/thunderc/files/media/audio/ui/android_audio.mp3:system/media/audio/ui/android_audio.mp3 \
-     device/lge/thunderc/files/media/bootanimation.zip \
+     device/lge/thunderc/files/media/bootanimation.zip:system/media/bootanimation.zip \
      device/lge/thunderc/files/etc/init.local.rc:/system/etc/init.local.rc 
 
 # Apps
