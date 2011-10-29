@@ -3,13 +3,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-$(call inherit-product-if-exists, vendor/lge/thunderc/thunderc-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/lg690/thunderc-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/lge/thunderc/overlay
+DEVICE_PACKAGE_OVERLAYS += device/lge/lg690/overlay
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-	LOCAL_KERNEL := device/lge/thunderc/kernel
+	LOCAL_KERNEL := device/lge/lg690/kernel
 else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
