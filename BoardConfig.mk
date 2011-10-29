@@ -1,7 +1,7 @@
 USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
--include vendor/lge/thunderc/BoardConfigVendor.mk
+-include vendor/lge/lg690/BoardConfigVendor.mk
 
 TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm7k
@@ -23,7 +23,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 # USB Mas Storage
 BOARD_UMS_LUNFILE := /sys/devices/platform/msm_hsusb/gadget/lun0/file
 
-TARGET_PREBUILT_KERNEL := device/lge/thunderc/kernel
+TARGET_PREBUILT_KERNEL := device/lge/lg690/kernel
 
 #BOARD_HAS_NO_SELECT_BUTTON := true
 # Use this flag if the board has a ext4 partition larger than 2gb
