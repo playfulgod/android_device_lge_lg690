@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/device_thunderc.mk
+    $(LOCAL_DIR)/device_lg690.mk
